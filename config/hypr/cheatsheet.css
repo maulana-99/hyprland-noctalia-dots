@@ -1,0 +1,76 @@
+/* Cheatsheet wofi — tema abu netral + aksen merah coral, lancip, monospace */
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  color: #e2e2e2;
+}
+
+window {
+  background-color: #131313;
+  border: 1px solid #2a2a2a;
+  border-radius: 0;
+  opacity: 0.97;
+}
+
+#outer-box {
+  padding: 12px;
+  margin: 0;
+}
+
+#input {
+  background-color: #1c1c1c;
+  border: 1px solid #3a3a3a;
+  border-radius: 0;
+  padding: 6px 10px;
+  margin: 0 0 10px 0;
+  color: #ffffff;
+}
+
+#input:focus {
+  border-color: #fd4663;
+}
+
+#inner-box {
+  margin: 0;
+}
+
+#list {
+  margin: 0;
+}
+
+#entry {
+  border-radius: 0;
+  padding: 3px 8px;
+  margin: 0;
+  color: #b5b5b5;
+  background-color: transparent;
+}
+
+#entry:selected {
+  background-color: #fd4663;
+  color: #131313;
+  border-radius: 0;
+}
+
+#entry:selected * {
+  color: #131313;
+}
+
+#text {
+  color: #b5b5b5;
+  margin: 0;
+}
+
+#text:selected {
+  color: #131313;
+}
+
+/* Kolom kedua (deskripsi/key) */
+#text:last-child {
+  color: #fd4663;
+  font-weight: bold;
+}
+
+#text:selected:last-child {
+  color: #131313;
+}

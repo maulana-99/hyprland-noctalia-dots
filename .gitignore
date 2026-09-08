@@ -1,0 +1,10 @@
+# Log perangkat (pribadi — jangan di-commit)
+*.log
+
+# Backup install script
+*.bak-*
+
+# Sembarang rahasia
+*.key
+*.pem
+.env

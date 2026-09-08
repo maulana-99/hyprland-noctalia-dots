@@ -1,0 +1,232 @@
+# Noctalia config — minimalis, produktif (kerja & kuliah)
+# Referensi default: `noctalia config export full`
+
+[theme]
+mode = "dark"              # dark saja dulu (bisa auto belakangan)
+source = "wallpaper"             # palet turun otomatis dari wallpaper
+wallpaper_scheme = "m3-monochrome" # abu netral bersih (cocok dengan aksen merah)
+
+# App theming — render warna Noctalia ke config app lain
+[theme.templates]
+enable_builtin_templates = true
+builtin_ids = [ "kitty", "gtk3", "gtk4", "starship", "hyprland" ]
+enable_community_templates = true
+community_ids = [ "neovim", "vscode" ]
+
+[shell]
+font_family = "JetBrainsMono Nerd Font"
+time_format = "{:%H:%M}"
+corner_radius_scale = 0.0   # sudut lancip (tanpa rounded) di semua panel
+
+[shell.panel]
+transparency_mode = "soft"   # panel lebih tembus, tanpa efek kaca/solid
+borders = false             # tanpa border (sesuai referensi)
+shadow = false              # tanpa shadow (lancip, TUI)
+
+# --- Control center: sidebar ikon kiri ala referensi ---
+[control_center]
+sidebar = "compact"
+sidebar_section = "compact"
+width = 700
+hidden_tabs = []
+show_session_button = true
+show_shortcut_labels = true
+
+# --- Bar: atas, full width, TUI (teks/ikon polos, tanpa kotak) ---
+[bar.default]
+position = "top"
+thickness = 28
+margin_ends = 0          # full width (tanpa jarak di ujung)
+padding = 5
+widget_spacing = 5
+background_opacity = 0.0  # transparan (dwm-style)
+border_width = 0.0       # tanpa border (dwm-style)
+radius = 0             # lancip (tanpa rounded)
+concave_edge_corners = false
+shadow = false          # tanpa shadow lembut (TUI native)
+contact_shadow = false
+hover_highlight = false # tanpa highlight glossy saat hover
+font_weight = 400       # regular, khas terminal
+font_scale = 1.0
+capsule = false          # widget polos, mengalir seperti teks terminal
+reserve_space = true
+start = [ "workspaces", "sep1", "taskbar" ]
+center = [ "clock" ]
+end = [ "media", "sep3", "volume", "sep4", "network", "sep5", "bluetooth", "sep6", "battery", "sep7", "clipboard", "sep8", "notifications", "sep9", "control-center", "sep10", "session" ]
+
+# --- Workspaces: nomor 1-9 selalu tampil, dibedakan warna ---
+[widget.workspaces]
+type = "workspaces"
+style = "minimal"
+show_labels = true
+label_source = "id"
+hide_when_empty = false          # tampilkan semua workspace termasuk kosong
+labels_only_when_occupied = false
+focused_color = "#ffffff"        # workspace aktif = putih (beda dari urgent)
+occupied_color = "#8a8a8a"       # workspace terisi = abu netral
+empty_color = "#3a3a3a"          # workspace kosong = abu redup
+urgent_color = "#fd4663"         # ada notif/link = merah coral
+
+# --- Taskbar: ikon app/window yang sedang berjalan ---
+[widget.taskbar]
+type = "taskbar"
+minimal = true
+show_window_title = false
+icon_scale = 1.0
+item_spacing = 6
+show_active_indicator = true
+active_indicator_color = "#ffffff"
+focused_color = "#ffffff"
+occupied_color = "#8a8a8a"
+
+# --- Widget pemisah simbol (dwm-style, tanpa border) ---
+[widget.sep1]
+type = "custom_button"
+glyph = ""
+label = "|"
+
+[widget.sep2]
+type = "custom_button"
+glyph = ""
+label = "|"
+
+[widget.sep3]
+type = "custom_button"
+glyph = ""
+label = "|"
+
+[widget.sep4]
+type = "custom_button"
+glyph = ""
+label = "|"
+
+[widget.sep5]
+type = "custom_button"
+glyph = ""
+label = "|"
+
+[widget.sep6]
+type = "custom_button"
+glyph = ""
+label = "|"
+
+[widget.sep7]
+type = "custom_button"
+glyph = ""
+label = "|"
+
+[widget.sep8]
+type = "custom_button"
+glyph = ""
+label = "|"
+
+[widget.sep9]
+type = "custom_button"
+glyph = ""
+label = "|"
+
+[widget.sep10]
+type = "custom_button"
+glyph = ""
+label = "|"
+
+# --- Dock: mati (minimalis) ---
+[dock]
+enabled = false
+radius = 0
+radius_top_left = 0
+radius_top_right = 0
+radius_bottom_left = 0
+radius_bottom_right = 0
+concave_edge_corners = false
+
+# --- Notifikasi Noctalia (dunst dinonaktifkan) ---
+[notification]
+enable_daemon = true
+position = "top_right"
+
+# --- Auto sleep / anti burn-in ---
+# Idle 3 menit → layar mati (cegah burn-in gambar statis)
+# Idle 5 menit → kunci layar + suspend (hemat & aman)
+[idle]
+behavior_order = [ "screen-off", "lock-and-suspend" ]
+pre_action_fade_seconds = 2.0
+
+[idle.behavior.screen-off]
+action = "screen_off"
+command = ""
+enabled = true
+locked_timeout = 0.0
+resume_command = ""
+timeout = 180.0
+
+[idle.behavior.lock-and-suspend]
+action = "lock_and_suspend"
+command = ""
+enabled = true
+locked_timeout = 0.0
+resume_command = ""
+timeout = 300.0
+
+# --- Wallpaper ---
+[wallpaper]
+enabled = true
+directory = "{{WALLPAPER_DIR}}"
+
+# --- Konfirmasi aksi berisiko (tekan-tahan countdown) ---
+# Daftar LENGKAP action power menu. Reboot & shutdown dikasih countdown 3s
+# biar nggak kebablasan klik; action lain tetap langsung jalan.
+[shell.session]
+grid = false
+grid_columns = 3
+show_shortcuts = true
+
+[[shell.session.actions]]
+action = "lock"
+command = ""
+countdown_seconds = 0.0
+enabled = true
+glyph = ""
+label = ""
+shortcut = "1"
+variant = "default"
+
+[[shell.session.actions]]
+action = "logout"
+command = ""
+countdown_seconds = 0.0
+enabled = true
+glyph = ""
+label = ""
+shortcut = "2"
+variant = "default"
+
+[[shell.session.actions]]
+action = "lock_and_suspend"
+command = ""
+countdown_seconds = 0.0
+enabled = true
+glyph = ""
+label = ""
+shortcut = "3"
+variant = "default"
+
+[[shell.session.actions]]
+action = "reboot"
+command = ""
+countdown_seconds = 3.0
+enabled = true
+glyph = ""
+label = ""
+shortcut = "4"
+variant = "default"
+
+[[shell.session.actions]]
+action = "shutdown"
+command = ""
+countdown_seconds = 3.0
+enabled = true
+glyph = ""
+label = ""
+shortcut = "5"
+variant = "destructive"
