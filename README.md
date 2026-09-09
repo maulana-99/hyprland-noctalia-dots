@@ -13,6 +13,7 @@ Setup desktop **minimalis-TUI** ala dwm: bar transparan penuh teks/ikon monospac
 - **Taskbar** — ikon app/window yang sedang berjalan di bar
 - **Power menu dengan konfirmasi** — shutdown/reboot butuh countdown 3 detik (anti kebablasan)
 - **Auto sleep anti burn-in** — layar mati setelah idle 3 menit, kunci+suspend setelah 5 menit
+- **Anti-sleep saat telpon/meeting** — daemon `call-guard` mendeteksi audio call aktif (Zoom, Google Meet, Discord, WhatsApp, Teams) lalu otomatis menyalakan caffeine (idle inhibitor); begitu call selesai, sleep normal kembali
 - **Popup cheatsheet** — `SUPER + Shift + /` menampilkan semua shortcut
 - **App theming otomatis** — kitty, GTK, starship, Hyprland border disinkron dari palet Noctalia
 - **Palet dari wallpaper** — skema `m3-monochrome` (abu netral) + aksen merah coral
@@ -93,6 +94,19 @@ Install script akan:
 
 Skema mnemonic: **huruf awal kata** (E=Explorer, B=Browser, F=Fullscreen, L=Lock, Q=Quit, S=Scratchpad). Lengkapnya ada di popup `SUPER + ?`.
 
+## Anti-sleep saat telpon
+
+`config/hypr/call-guard.sh` (daemon autostart) memonitor audio via `pactl`:
+
+- **Call terdeteksi** bila ada stream audio live (WebRTC) yang tidak di-pause dari
+  aplikasi meeting/browser (Firefox, Chrome, Discord, Zoom, Teams, WhatsApp, dll),
+  atau mikrofon (source-output) sedang dipakai app meeting.
+- Maka `noctalia msg caffeine-enable` → idle daemon tidak akan menidurkan laptop.
+- **Call selesai** (tidak ada stream beberapa siklus) → `caffeine-disable`, sleep normal kembali.
+
+Butuh `pactl` (bagian dari `pipewire-pulse`). Sesuaikan `MEETING_APPS` di skrip kalau
+aplikasi kamu beda.
+
 ## Struktur repo
 
 ```
@@ -101,6 +115,7 @@ hyprland-noctalia-dots/
 ├── config/
 │   ├── hypr/
 │   │   ├── hyprland.lua          # config utama Hyprland (monitor, keybind, rule)
+│   │   ├── call-guard.sh         # anti-sleep otomatis saat telpon/meeting
 │   │   ├── cheatsheet.sh         # popup daftar shortcut (wofi)
 │   │   ├── cheatsheet.css        # styling popup
 │   │   └── noctalia.lua.example  # contoh warna hasil generate Noctalia

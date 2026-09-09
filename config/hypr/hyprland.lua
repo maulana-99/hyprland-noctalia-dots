@@ -54,6 +54,8 @@ local browser     = "firefox"
 hl.on("hyprland.start", function ()
   hl.exec_cmd("noctalia")            -- desktop shell (bar, launcher, notif, dll.)
   hl.exec_cmd("cliphist store")      -- clipboard history daemon
+  -- Anti-sleep otomatis saat telpon/meeting (Zoom/Meet/Discord dll.)
+  hl.exec_cmd("bash ~/.config/hypr/call-guard.sh >/dev/null 2>&1 &")
 end)
 
 
