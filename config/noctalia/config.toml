@@ -54,6 +54,11 @@ start = [ "workspaces", "sep1", "taskbar" ]
 center = [ "clock" ]
 end = [ "media", "sep3", "volume", "sep4", "network", "sep5", "bluetooth", "sep6", "battery", "sep7", "clipboard", "sep8", "notifications", "sep9", "control-center", "sep10", "session" ]
 
+# --- Jam: tanggal + bulan + tahun + waktu ---
+[widget.clock]
+type = "clock"
+format = "{:%a %d %b %Y  %H:%M}"   # contoh: Sun 07 Sep 2026  10:30
+
 # --- Workspaces: nomor 1-9 selalu tampil, dibedakan warna ---
 [widget.workspaces]
 type = "workspaces"
@@ -171,7 +176,7 @@ timeout = 300.0
 # --- Wallpaper ---
 [wallpaper]
 enabled = true
-directory = "{{WALLPAPER_DIR}}"
+directory = "/home/iru/Pictures/wallpapers"
 
 # --- Konfirmasi aksi berisiko (tekan-tahan countdown) ---
 # Daftar LENGKAP action power menu. Reboot & shutdown dikasih countdown 3s

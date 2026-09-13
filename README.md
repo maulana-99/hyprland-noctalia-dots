@@ -14,6 +14,7 @@ Setup desktop **minimalis-TUI** ala dwm: bar transparan penuh teks/ikon monospac
 - **Power menu dengan konfirmasi** — shutdown/reboot butuh countdown 3 detik (anti kebablasan)
 - **Auto sleep anti burn-in** — layar mati setelah idle 3 menit, kunci+suspend setelah 5 menit
 - **Anti-sleep saat telpon/meeting** — daemon `call-guard` mendeteksi audio call aktif (Zoom, Google Meet, Discord, WhatsApp, Teams) lalu otomatis menyalakan caffeine (idle inhibitor); begitu call selesai, sleep normal kembali
+- **Terminal sekali pakai** — `SUPER + Shift + Return` membuka terminal mengambang di tengah layar dengan background solid (kitty lain tetap transparan); tertutup sendiri saat shell keluar
 - **Popup cheatsheet** — `SUPER + Shift + /` menampilkan semua shortcut
 - **App theming otomatis** — kitty, GTK, starship, Hyprland border disinkron dari palet Noctalia
 - **Palet dari wallpaper** — skema `m3-monochrome` (abu netral) + aksen merah coral
@@ -76,6 +77,7 @@ Install script akan:
 |---|---|
 | `SUPER + ?` | **Tampilkan semua shortcut (cheatsheet popup)** |
 | `SUPER + Return` | Terminal (kitty) |
+| `SUPER + Shift + Return` | Terminal sekali pakai (floating, background solid) |
 | `SUPER + E` | File manager (dolphin) |
 | `SUPER + B` | Browser (firefox) |
 | `SUPER + Space` | Launcher (Noctalia) |
@@ -116,6 +118,7 @@ hyprland-noctalia-dots/
 │   ├── hypr/
 │   │   ├── hyprland.lua          # config utama Hyprland (monitor, keybind, rule)
 │   │   ├── call-guard.sh         # anti-sleep otomatis saat telpon/meeting
+│   │   ├── quick-term.sh         # terminal sekali pakai (floating, background solid)
 │   │   ├── cheatsheet.sh         # popup daftar shortcut (wofi)
 │   │   ├── cheatsheet.css        # styling popup
 │   │   └── noctalia.lua.example  # contoh warna hasil generate Noctalia

@@ -273,6 +273,7 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- --- Aplikasi (huruf awal, gampang diingat) ---
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))     -- Terminal
+hl.bind(mainMod .. " + SHIFT + Return", hl.dsp.exec_cmd("bash ~/.config/hypr/quick-term.sh")) -- Terminal sekali pakai (floating)
 hl.bind(mainMod .. " + E",      hl.dsp.exec_cmd(fileManager))  -- File manager (Explorer)
 hl.bind(mainMod .. " + B",      hl.dsp.exec_cmd(browser))      -- Browser
 hl.bind(mainMod .. " + W",      hl.dsp.exec_cmd("kitty nvim")) -- Editor (nvim di kitty)
@@ -424,6 +425,16 @@ hl.window_rule({
 
     move  = "20 monitor_h-120",
     float = true,
+})
+
+-- Terminal sekali pakai (quick-term): mengambang, di tengah, background solid
+hl.window_rule({
+    name  = "quick-term-float",
+    match = { class = "quick-term" },
+
+    float  = true,
+    size   = "760 500",
+    center = true,
 })
 
 -- For Noctalia Color templates
