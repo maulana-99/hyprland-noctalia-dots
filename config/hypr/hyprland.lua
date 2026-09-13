@@ -273,7 +273,18 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- --- Aplikasi (huruf awal, gampang diingat) ---
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))     -- Terminal
-hl.bind(mainMod .. " + SHIFT + Return", hl.dsp.exec_cmd("bash ~/.config/hypr/quick-term.sh")) -- Terminal sekali pakai (floating)
+-- Terminal sekali pakai — TOGGLE: tekan buka, tekan lagi tutup (nggak bisa dobel)
+hl.bind(mainMod .. " + SHIFT + Return", function()
+    local wins = hl.get_windows({ class = "quick-term" })
+    if wins and #wins > 0 then
+        -- sudah terbuka → fokus lalu tutup
+        hl.dispatch(hl.dsp.focus({ window = wins[1] }))
+        hl.dispatch(hl.dsp.window.close())
+    else
+        -- belum ada → buka instance baru
+        hl.dispatch(hl.dsp.exec_cmd("bash ~/.config/hypr/quick-term.sh"))
+    end
+end)
 hl.bind(mainMod .. " + E",      hl.dsp.exec_cmd(fileManager))  -- File manager (Explorer)
 hl.bind(mainMod .. " + B",      hl.dsp.exec_cmd(browser))      -- Browser
 hl.bind(mainMod .. " + W",      hl.dsp.exec_cmd("kitty nvim")) -- Editor (nvim di kitty)

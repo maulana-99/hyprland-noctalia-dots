@@ -2,12 +2,22 @@
 # ============================================================
 #  quick-term.sh — terminal sekali pakai (floating, background solid)
 #
-#  Buka terminal mengambang di tengah layar. Instance ini SAJA yang
+#  Membuka terminal mengambang di tengah layar. Instance ini SAJA yang
 #  punya background solid (#131313) — kitty lain tetap transparan.
-#  Window tertutup otomatis begitu shell-nya keluar (sekali pakai).
+#  Window tertutup otomatis begitu shell-nya keluar.
 #
-#  Dipanggil via keybind SUPER + Shift + Return.
+#  Toggle-nya ditangani di hyprland.lua (SUPER + Shift + Return):
+#    belum ada window  → jalankan skrip ini
+#    sudah ada window  → fokus + tutup
+#  Skrip ini juga menjaga: kalau sudah ada window quick-term, tidak
+#  membuka instance kedua (anti-dobel).
 # ============================================================
+set -u
+
+# Sudah ada quick-term? jangan buka lagi.
+if hyprctl clients -j 2>/dev/null | grep -q '"class": "quick-term"'; then
+  exit 0
+fi
 
 exec kitty \
   --class quick-term \
