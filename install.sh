@@ -71,6 +71,14 @@ else
 fi
 rm -f "$tmp_noctalia"
 
+# Palet custom (abu bertingkat + aksen merah)
+mkdir -p "$CFG/noctalia/palettes"
+for p in "$DOTDIR"/config/noctalia/palettes/*.json; do
+  [[ -e "$p" ]] || continue
+  cp "$p" "$CFG/noctalia/palettes/"
+  ok "Palet: $(basename "$p")"
+done
+
 # ---------- 3. kitty ----------
 deploy "$DOTDIR/config/kitty/kitty.conf"           "$CFG/kitty/kitty.conf"
 deploy "$DOTDIR/config/kitty/themes/noctalia.conf" "$CFG/kitty/themes/noctalia.conf"

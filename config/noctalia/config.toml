@@ -3,8 +3,8 @@
 
 [theme]
 mode = "dark"              # dark saja dulu (bisa auto belakangan)
-source = "wallpaper"             # palet turun otomatis dari wallpaper
-wallpaper_scheme = "m3-monochrome" # abu netral bersih (cocok dengan aksen merah)
+source = "custom"          # palet custom: abu bertingkat + aksen merah
+custom_palette = "Graphite"
 
 # App theming — render warna Noctalia ke config app lain
 [theme.templates]

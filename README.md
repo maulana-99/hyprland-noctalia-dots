@@ -17,7 +17,7 @@ Setup desktop **minimalis-TUI** ala dwm: bar transparan penuh teks/ikon monospac
 - **Terminal sekali pakai (toggle)** — `SUPER + Shift + Return` buka terminal mengambang di tengah dengan background solid; tekan lagi untuk menutup. Hanya boleh ada satu instance (anti-dobel), dan otomatis tertutup saat shell keluar
 - **Popup cheatsheet** — `SUPER + Shift + /` menampilkan semua shortcut
 - **App theming otomatis** — kitty, GTK, starship, Hyprland border disinkron dari palet Noctalia
-- **Palet dari wallpaper** — skema `m3-monochrome` (abu netral) + aksen merah coral
+- **Palet custom "Graphite"** — abu bertingkat dengan kontras jelas (`#131313` → `#2b2b2b` → `#5c5c5c`) + aksen merah coral `#FD4663`
 
 ## Screenshot-style preview
 
@@ -123,7 +123,9 @@ hyprland-noctalia-dots/
 │   │   ├── cheatsheet.css        # styling popup
 │   │   └── noctalia.lua.example  # contoh warna hasil generate Noctalia
 │   ├── noctalia/
-│   │   └── config.toml           # shell: bar, dock, idle, session, wallpaper
+│   │   ├── config.toml           # shell: bar, dock, idle, session, wallpaper
+│   │   └── palettes/
+│   │       └── Graphite.json     # palet custom (abu bertingkat + merah)
 │   ├── kitty/
 │   │   ├── kitty.conf
 │   │   └── themes/noctalia.conf  # warna kitty (generate Noctalia)
