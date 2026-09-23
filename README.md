@@ -15,6 +15,7 @@ Setup desktop **minimalis-TUI** ala dwm: bar transparan penuh teks/ikon monospac
 - **Auto sleep anti burn-in** — layar mati setelah idle 3 menit, kunci+suspend setelah 5 menit
 - **Anti-sleep saat telpon/meeting** — daemon `call-guard` mendeteksi audio call aktif (Zoom, Google Meet, Discord, WhatsApp, Teams) lalu otomatis menyalakan caffeine (idle inhibitor); begitu call selesai, sleep normal kembali
 - **Terminal sekali pakai (toggle)** — `SUPER + Shift + Return` buka terminal mengambang di tengah dengan background solid; tekan lagi untuk menutup. Hanya boleh ada satu instance (anti-dobel), dan otomatis tertutup saat shell keluar
+- **Tombol custom di bar** — contoh: tombol on/off 9Router (`custom_button` + aksi klik), gampang ditambah untuk aplikasi lain
 - **Popup cheatsheet** — `SUPER + Shift + /` menampilkan semua shortcut
 - **App theming otomatis** — kitty, GTK, starship, Hyprland border disinkron dari palet Noctalia
 - **Palet custom "Graphite"** — abu bertingkat dengan kontras jelas (`#131313` → `#2b2b2b` → `#5c5c5c`) + aksen merah coral `#FD4663`
@@ -119,6 +120,7 @@ hyprland-noctalia-dots/
 │   │   ├── hyprland.lua          # config utama Hyprland (monitor, keybind, rule)
 │   │   ├── call-guard.sh         # anti-sleep otomatis saat telpon/meeting
 │   │   ├── quick-term.sh         # terminal sekali pakai (floating, background solid)
+│   │   ├── 9router-toggle.sh     # tombol on/off 9Router (custom_button di bar)
 │   │   ├── cheatsheet.sh         # popup daftar shortcut (wofi)
 │   │   ├── cheatsheet.css        # styling popup
 │   │   └── noctalia.lua.example  # contoh warna hasil generate Noctalia

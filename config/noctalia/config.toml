@@ -52,7 +52,18 @@ capsule = false          # widget polos, mengalir seperti teks terminal
 reserve_space = true
 start = [ "workspaces", "sep1", "taskbar" ]
 center = [ "clock" ]
-end = [ "media", "sep3", "volume", "sep4", "network", "sep5", "bluetooth", "sep6", "battery", "sep7", "clipboard", "sep8", "notifications", "sep9", "control-center", "sep10", "session" ]
+end = [ "media", "sep3", "volume", "sep4", "network", "sep5", "bluetooth", "sep6", "battery", "sep7", "clipboard", "sep8", "notifications", "sep9", "control-center", "sep10", "session", "sep11", "router9" ]
+
+# --- Tombol on/off 9Router ---
+[widget.router9]
+type = "custom_button"
+glyph = "router"
+label = ""
+tooltip = "9Router: nyala/mati"
+interactive = true
+
+[widget.router9.actions]
+left = "exec bash ~/.config/hypr/9router-toggle.sh"
 
 # --- Jam: tanggal + bulan + tahun + waktu ---
 [widget.clock]
@@ -131,6 +142,11 @@ glyph = ""
 label = "|"
 
 [widget.sep10]
+type = "custom_button"
+glyph = ""
+label = "|"
+
+[widget.sep11]
 type = "custom_button"
 glyph = ""
 label = "|"
