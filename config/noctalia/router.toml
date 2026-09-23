@@ -1,0 +1,11 @@
+# Otomatis ditulis oleh 9router-toggle.sh — jangan edit manual.
+[widget.router9]
+type = "custom_button"
+glyph = "router"
+label = ""
+tooltip = "9Router: NYALA — klik untuk matikan"
+color = "#fd4663"
+icon_color = "#fd4663"
+
+[widget.router9.actions]
+left = "exec bash ~/.config/hypr/9router-toggle.sh"

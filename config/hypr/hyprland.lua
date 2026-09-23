@@ -56,6 +56,8 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("cliphist store")      -- clipboard history daemon
   -- Anti-sleep otomatis saat telpon/meeting (Zoom/Meet/Discord dll.)
   hl.exec_cmd("bash ~/.config/hypr/call-guard.sh >/dev/null 2>&1 &")
+  -- Sinkronkan tampilan tombol 9Router dengan status sebenarnya
+  hl.exec_cmd("bash ~/.config/hypr/9router-toggle.sh --sync")
 end)
 
 

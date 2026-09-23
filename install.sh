@@ -79,6 +79,10 @@ for p in "$DOTDIR"/config/noctalia/palettes/*.json; do
   ok "Palet: $(basename "$p")"
 done
 
+# Widget tambahan (tombol 9Router) — Noctalia baca semua *.toml di folder ini
+[[ -f "$DOTDIR/config/noctalia/router.toml" ]] && \
+  deploy "$DOTDIR/config/noctalia/router.toml" "$CFG/noctalia/router.toml"
+
 # ---------- 3. kitty ----------
 deploy "$DOTDIR/config/kitty/kitty.conf"           "$CFG/kitty/kitty.conf"
 deploy "$DOTDIR/config/kitty/themes/noctalia.conf" "$CFG/kitty/themes/noctalia.conf"
