@@ -24,6 +24,8 @@ command -v noctalia     >/dev/null 2>&1 || warn "Noctalia belum ketemu di PATH â
 command -v kitty        >/dev/null 2>&1 || warn "kitty belum terpasang."
 command -v flameshot    >/dev/null 2>&1 || warn "flameshot belum terpasang (dipakai screenshot)."
 command -v wofi         >/dev/null 2>&1 || warn "wofi belum terpasang (dipakai popup cheatsheet)."
+command -v nautilus     >/dev/null 2>&1 || warn "nautilus belum terpasang (file manager SUPER+E)."
+command -v pactl        >/dev/null 2>&1 || warn "pactl belum terpasang (dipakai call-guard)."
 
 # ---------- Folder tujuan ----------
 CFG="$HOME/.config"
@@ -56,7 +58,11 @@ echo "Deploy config dari: $DOTDIR"
 deploy "$DOTDIR/config/hypr/hyprland.lua"         "$CFG/hypr/hyprland.lua"
 deploy "$DOTDIR/config/hypr/cheatsheet.sh"        "$CFG/hypr/cheatsheet.sh"
 deploy "$DOTDIR/config/hypr/cheatsheet.css"       "$CFG/hypr/cheatsheet.css"
-chmod +x "$CFG/hypr/cheatsheet.sh" 2>/dev/null || true
+# Script yang dipanggil hyprland.lua / widget Noctalia (autostart + keybind + tombol bar)
+deploy "$DOTDIR/config/hypr/call-guard.sh"        "$CFG/hypr/call-guard.sh"
+deploy "$DOTDIR/config/hypr/quick-term.sh"        "$CFG/hypr/quick-term.sh"
+deploy "$DOTDIR/config/hypr/9router-toggle.sh"    "$CFG/hypr/9router-toggle.sh"
+chmod +x "$CFG/hypr/"*.sh 2>/dev/null || true
 
 # ---------- 2. Noctalia ----------
 # config.toml berisi placeholder {{WALLPAPER_DIR}} â€” isi dengan path pengguna
@@ -83,6 +89,13 @@ done
 [[ -f "$DOTDIR/config/noctalia/router.toml" ]] && \
   deploy "$DOTDIR/config/noctalia/router.toml" "$CFG/noctalia/router.toml"
 
+# Plugin lokal Noctalia (Desk Todo: todo list di desktop). Sumber "local" harus
+# menunjuk ke ~/.config/noctalia-plugins (default Noctalia). Aktifkan:
+#   noctalia msg plugins enable iru/desk-todo
+mkdir -p "$CFG/noctalia-plugins"
+deploy "$DOTDIR/config/noctalia-plugins/catalog.toml" "$CFG/noctalia-plugins/catalog.toml"
+deploy "$DOTDIR/config/noctalia-plugins/desk-todo"    "$CFG/noctalia-plugins/desk-todo"
+
 # ---------- 3. kitty ----------
 deploy "$DOTDIR/config/kitty/kitty.conf"           "$CFG/kitty/kitty.conf"
 deploy "$DOTDIR/config/kitty/themes/noctalia.conf" "$CFG/kitty/themes/noctalia.conf"
@@ -103,6 +116,9 @@ ok "Selesai! Langkah berikutnya:"
 echo "  1. Reload Hyprland :  hyprctl reload   (atau restart sesi)"
 echo "  2. Validasi Noctalia:  noctalia config validate"
 echo "  3. Noctalia:           noctalia msg config-reload"
+echo "  4. Plugin todo:        noctalia msg plugins enable iru/desk-todo"
+echo "     (posisi widget di desktop_widgets/config.toml diset utk monitor eDP-1;"
+echo "      ubah output/cx/cy kalau monitormu beda)"
 echo ""
 echo "  Catatan: warna di kitty/starship/noctalia.lua di-generate ulang otomatis"
 echo "  oleh Noctalia (app theming) begitu kamu ganti palet/wallpaper."

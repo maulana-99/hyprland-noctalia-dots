@@ -16,6 +16,7 @@ Setup desktop **minimalis-TUI** ala dwm: bar transparan penuh teks/ikon monospac
 - **Anti-sleep saat telpon/meeting** — daemon `call-guard` mendeteksi audio call aktif (Zoom, Google Meet, Discord, WhatsApp, Teams) lalu otomatis menyalakan caffeine (idle inhibitor); begitu call selesai, sleep normal kembali
 - **Terminal sekali pakai (toggle)** — `SUPER + Shift + Return` buka terminal mengambang di tengah dengan background solid; tekan lagi untuk menutup. Hanya boleh ada satu instance (anti-dobel), dan otomatis tertutup saat shell keluar
 - **Tombol custom di bar** — tombol on/off 9Router: **menyala merah `#FD4663` saat aktif**, abu saat mati. Status dideteksi dari port, tombol di-update otomatis (hot-reload) tiap toggle
+- **Desk Todo** — plugin Noctalia lokal (`iru/desk-todo`): todo list menempel di desktop seperti bagian wallpaper. Centang, hapus (dengan undo), filter, tandai "sedang dikerjakan", prioritas dan tenggat; tambah/edit lewat panel `noctalia msg panel-toggle iru/desk-todo:editor`. Data di `~/.local/state/noctalia/plugins/data/iru/desk-todo/todos.json`
 - **Popup cheatsheet** — `SUPER + Shift + /` menampilkan semua shortcut
 - **App theming otomatis** — kitty, GTK, starship, Hyprland border disinkron dari palet Noctalia
 - **Palet custom "Graphite"** — abu bertingkat dengan kontras jelas (`#131313` → `#2b2b2b` → `#5c5c5c`) + aksen merah coral `#FD4663`
@@ -35,7 +36,7 @@ Setup desktop **minimalis-TUI** ala dwm: bar transparan penuh teks/ikon monospac
 Arch Linux (atau Arch-based) + Wayland:
 
 ```
-sudo pacman -S hyprland kitty dolphin firefox flameshot wofi \
+sudo pacman -S hyprland kitty nautilus firefox flameshot wofi \
     wpctl wireplumber brightnessctl ttf-jetbrains-mono-nerd \
     cliphist wl-clipboard starship
 ```
@@ -60,12 +61,18 @@ Setelah itu:
 hyprctl reload                # atau logout-login ulang sesi
 noctalia config validate      # pastikan config Noctalia valid
 noctalia msg config-reload
+noctalia msg plugins enable iru/desk-todo   # todo list di desktop
 ```
+
+> Posisi widget Desk Todo di `config.toml` (`[desktop_widgets]`) diset untuk monitor
+> `eDP-1` 1920x1200. Ubah `output`, `cx`, `cy` kalau monitormu beda, atau pindahkan lewat GUI Noctalia.
 
 Install script akan:
 1. Menyalin config ke `~/.config/hypr`, `~/.config/noctalia`, `~/.config/kitty`, `~/.config/starship.toml`
-2. Me-resolve placeholder `{{WALLPAPER_DIR}}` di config Noctalia ke `~/Pictures/wallpapers`
-3. Menyalin wallpaper bawaan ke `~/Pictures/wallpapers`
+2. Menyalin script `call-guard`, `quick-term`, `9router-toggle` dan plugin Desk Todo
+   (`~/.config/noctalia-plugins/`)
+3. Me-resolve placeholder `{{WALLPAPER_DIR}}` di config Noctalia ke `~/Pictures/wallpapers`
+4. Menyalin wallpaper bawaan ke `~/Pictures/wallpapers`
 
 > **Penting soal warna:** kitty / starship / `hypr/noctalia.lua` berisi warna yang
 > **di-generate otomatis oleh Noctalia** dari wallpaper aktif (app theming).
@@ -79,7 +86,7 @@ Install script akan:
 | `SUPER + ?` | **Tampilkan semua shortcut (cheatsheet popup)** |
 | `SUPER + Return` | Terminal (kitty) |
 | `SUPER + Shift + Return` | Terminal sekali pakai (toggle: buka/tutup, floating, background solid) |
-| `SUPER + E` | File manager (dolphin) |
+| `SUPER + E` | File manager (nautilus) |
 | `SUPER + B` | Browser (firefox) |
 | `SUPER + Space` | Launcher (Noctalia) |
 | `SUPER + A` | Control center |
@@ -129,6 +136,9 @@ hyprland-noctalia-dots/
 │   │   ├── router.toml           # tombol 9Router (ditulis ulang otomatis)
 │   │   └── palettes/
 │   │       └── Graphite.json     # palet custom (abu bertingkat + merah)
+│   ├── noctalia-plugins/
+│   │   ├── catalog.toml          # daftar plugin sumber "local"
+│   │   └── desk-todo/            # plugin todo list di desktop (Luau)
 │   ├── kitty/
 │   │   ├── kitty.conf
 │   │   └── themes/noctalia.conf  # warna kitty (generate Noctalia)
