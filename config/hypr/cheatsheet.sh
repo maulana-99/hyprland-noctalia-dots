@@ -21,7 +21,7 @@ print_entry() {
   echo ""
   print_entry "Terminal"                      "SUPER + Return"
   print_entry "Terminal Sekali Pakai (toggle)" "SUPER + Shift + Return"
-  print_entry "File Manager (dolphin)"        "SUPER + E"
+  print_entry "File Manager (nautilus)"       "SUPER + E"
   print_entry "Browser (firefox)"             "SUPER + B"
   print_entry "Editor (nvim)"                 "SUPER + W"
 
