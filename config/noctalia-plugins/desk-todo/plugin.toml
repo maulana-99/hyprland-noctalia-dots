@@ -1,0 +1,67 @@
+# Desk Todo - a todo list that lives on the desktop like part of the wallpaper.
+#
+# service -> owns todos.json: loads it into noctalia.state at start, saves on every change
+# desktop -> the list itself: tick, delete (with undo), filter, page, clear done
+# editor  -> floating panel with text input, priority and due date (desktop widgets
+#            are background layer surfaces and cannot take keyboard focus)
+#
+# Open the editor from anywhere: noctalia msg panel-toggle iru/desk-todo:editor
+
+id = "iru/desk-todo"
+name = "Desk Todo"
+version = "1.0.0"
+# 28 for dismiss_on_outside_click + keyboard_focus on the panel; 22 for require().
+plugin_api = 28
+author = "iru"
+license = "MIT"
+dependencies = []
+tags = ["desktop", "panel", "service", "productivity"]
+icon = "checklist"
+description = "Todo list pinned to the desktop: tick, delete and filter in place; add and edit through a small panel."
+
+[[service]]
+id = "store"
+entry = "service.luau"
+
+[[desktop_widget]]
+id = "desktop"
+entry = "desktop.luau"
+
+  [[desktop_widget.setting]]
+  key = "width"
+  type = "int"
+  label_key = "settings.width.label"
+  description_key = "settings.width.description"
+  default = 380
+  min = 280
+  max = 640
+  step = 10
+
+  [[desktop_widget.setting]]
+  key = "page_size"
+  type = "int"
+  label_key = "settings.page_size.label"
+  description_key = "settings.page_size.description"
+  default = 8
+  min = 3
+  max = 20
+
+  [[desktop_widget.setting]]
+  key = "background_opacity"
+  type = "float"
+  label_key = "settings.background_opacity.label"
+  description_key = "settings.background_opacity.description"
+  default = 0.72
+  min = 0.0
+  max = 1.0
+  step = 0.05
+
+[[panel]]
+id = "editor"
+entry = "editor.luau"
+width = 440
+height = 390
+placement = "floating"
+position = "center"
+dismiss_on_outside_click = true
+keyboard_focus = "exclusive"

@@ -1,0 +1,16 @@
+{
+  "settings": {
+    "width": {
+      "label": "Lebar",
+      "description": "Lebar widget dalam piksel."
+    },
+    "page_size": {
+      "label": "Todo per halaman",
+      "description": "Jumlah baris sebelum widget membagi daftar ke halaman berikutnya."
+    },
+    "background_opacity": {
+      "label": "Opasitas latar",
+      "description": "0 = teks langsung di atas wallpaper, 1 = latar surface penuh."
+    }
+  }
+}

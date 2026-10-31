@@ -183,7 +183,7 @@ timeout = 300.0
 # --- Wallpaper ---
 [wallpaper]
 enabled = true
-directory = "/home/iru/Pictures/wallpapers"
+directory = "{{WALLPAPER_DIR}}"
 
 # --- Konfirmasi aksi berisiko (tekan-tahan countdown) ---
 # Daftar LENGKAP action power menu. Reboot & shutdown dikasih countdown 3s
@@ -242,3 +242,25 @@ glyph = ""
 label = ""
 shortcut = "5"
 variant = "destructive"
+
+# --- Desk Todo (plugin lokal ~/.config/noctalia-plugins) di desktop kanan atas ---
+[desktop_widgets]
+enabled = true
+schema_version = 2
+widget_order = [ "desktop-widget-00000000d0e5c7d0" ]
+
+    [desktop_widgets.widget."desktop-widget-00000000d0e5c7d0"]
+    type = "iru/desk-todo:desktop"
+    output = "eDP-1"
+    cx = 1706.0
+    cy = 242.0
+    box_width = 380.0
+    box_height = 380.0
+    placement_width = 1920.0
+    placement_height = 1200.0
+    rotation = 0.0
+
+        [desktop_widgets.widget."desktop-widget-00000000d0e5c7d0".settings]
+        background_opacity = 0.0
+        background_radius = 0.0
+        background_padding = 0.0

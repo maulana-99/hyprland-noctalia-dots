@@ -1,0 +1,12 @@
+# Local Noctalia plugin source (kind = "path"). One [[plugin]] row per plugin subdirectory.
+
+[[plugin]]
+id = "iru/desk-todo"
+name = "Desk Todo"
+version = "1.0.0"
+author = "iru"
+license = "MIT"
+icon = "checklist"
+description = "Todo list pinned to the desktop: tick, delete and filter in place; add and edit through a small panel."
+plugin_api = 28
+tags = ["desktop", "panel", "service", "productivity"]
