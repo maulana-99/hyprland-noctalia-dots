@@ -50,10 +50,29 @@ sudo pacman -S hyprland kitty nautilus firefox flameshot wofi \
 ```bash
 git clone https://github.com/maulana-99/hyprland-noctalia-dots.git
 cd hyprland-noctalia-dots
-./install.sh          # salin config (file lama di-backup otomatis)
-# atau
+./install.sh          # pasang semua komponen (file lama di-backup otomatis)
 ./install.sh --link   # pakai symlink, perubahan repo langsung kebawa
 ```
+
+Bisa juga dipasang **per komponen**, sebutkan namanya:
+
+```bash
+./install.sh --list                      # daftar komponen
+./install.sh kitty starship              # hanya kitty + starship
+./install.sh --link hypr noctalia        # symlink hanya Hyprland + Noctalia
+./install.sh plugins                     # hanya plugin Desk Todo
+```
+
+| Komponen | Isi |
+|---|---|
+| `hypr` | `hyprland.lua` + script (call-guard, quick-term, 9router-toggle, cheatsheet) |
+| `noctalia` | `config.toml`, `router.toml`, palet Graphite |
+| `plugins` | plugin lokal Noctalia: Desk Todo |
+| `kitty` | `kitty.conf` + tema |
+| `starship` | prompt |
+| `wallpapers` | wallpaper bawaan ke `~/Pictures/wallpapers` |
+
+Pemeriksaan prasyarat hanya untuk komponen yang dipilih.
 
 Setelah itu:
 
