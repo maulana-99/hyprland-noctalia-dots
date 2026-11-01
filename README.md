@@ -33,17 +33,32 @@ Setup desktop **minimalis-TUI** ala dwm: bar transparan penuh teks/ikon monospac
 
 ## Kebutuhan (dependencies)
 
-Arch Linux (atau Arch-based) + Wayland:
+Arch Linux (atau Arch-based) + Wayland. Semua paket ada di repo resmi `core`/`extra`
+(termasuk `hyprland` 0.57 dan `noctalia` 5.x), tanpa AUR. Daftar lengkap ada di
+[`packages.txt`](packages.txt) dan dipasang otomatis oleh `./install.sh deps`.
 
-```
-sudo pacman -S hyprland kitty nautilus firefox flameshot wofi \
-    wpctl wireplumber brightnessctl ttf-jetbrains-mono-nerd \
-    cliphist wl-clipboard starship
+## Fresh Arch (instalasi baru)
+
+Dari Arch yang baru selesai di-install (sudah ada user biasa dengan `sudo`, internet, dan `git`):
+
+```bash
+sudo pacman -S --needed git
+git clone https://github.com/maulana-99/hyprland-noctalia-dots.git
+cd hyprland-noctalia-dots
+
+./install.sh deps     # paket (packages.txt) + aktifkan NetworkManager & bluetooth
+./install.sh          # config: hypr, noctalia, plugins, kitty, starship, wallpapers
 ```
 
-- **Noctalia v5** — shell desktop (bar, launcher, control center, lock, idle, wallpaper).
-  Install dari repo/AUR Noctalia lalu pastikan `noctalia` ada di `PATH`.
-- `hyprctl` & `noctalia msg` dipakai dari keybind.
+Lalu login ke tty dan jalankan `Hyprland`. Noctalia, `call-guard`, dan sinkronisasi
+tombol 9Router start otomatis lewat autostart di `hyprland.lua`. Setelah masuk sesi:
+
+```bash
+noctalia config validate
+noctalia msg plugins enable iru/desk-todo
+```
+
+Opsional: display manager (mis. `ly` atau `sddm`) kalau tidak mau start dari tty.
 
 ## Instalasi
 
@@ -65,6 +80,7 @@ Bisa juga dipasang **per komponen**, sebutkan namanya:
 
 | Komponen | Isi |
 |---|---|
+| `deps` | paket dari `packages.txt` via `pacman -S --needed` + aktifkan NetworkManager/bluetooth (butuh sudo, **tidak ikut default**) |
 | `hypr` | `hyprland.lua` + script (call-guard, quick-term, 9router-toggle, cheatsheet) |
 | `noctalia` | `config.toml`, `router.toml`, palet Graphite |
 | `plugins` | plugin lokal Noctalia: Desk Todo |
@@ -140,7 +156,8 @@ aplikasi kamu beda.
 
 ```
 hyprland-noctalia-dots/
-├── install.sh                    # script deploy (copy/symlink)
+├── install.sh                    # script deploy per komponen (deps/copy/symlink)
+├── packages.txt                  # paket Arch yang dibutuhkan (./install.sh deps)
 ├── config/
 │   ├── hypr/
 │   │   ├── hyprland.lua          # config utama Hyprland (monitor, keybind, rule)

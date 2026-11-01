@@ -1,0 +1,44 @@
+# Paket resmi Arch (repo core/extra) yang dibutuhkan setup ini.
+# Dipasang oleh:  ./install.sh deps   (pacman -S --needed)
+# Satu paket per baris; baris diawali # diabaikan.
+
+# Compositor + shell
+hyprland
+noctalia
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+qt6-wayland
+xdg-user-dirs
+
+# Aplikasi yang dipanggil keybind / bar
+kitty
+nautilus
+firefox
+flameshot
+wofi
+neovim
+
+# Utilitas yang dipanggil config / script
+brightnessctl
+cliphist
+wl-clipboard
+grim
+slurp
+jq
+libnotify
+playerctl
+starship
+
+# Audio (wpctl dari wireplumber, pactl dari libpulse dipakai call-guard)
+pipewire
+pipewire-pulse
+wireplumber
+libpulse
+
+# Jaringan + bluetooth (widget bar)
+networkmanager
+bluez
+bluez-utils
+
+# Font (kitty + Noctalia)
+ttf-jetbrains-mono-nerd

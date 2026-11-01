@@ -4,13 +4,14 @@
 #  Setup: Hyprland (Lua config) + Noctalia v5 + kitty + starship
 #
 #  Cara pakai:  ./install.sh [--link] [komponen ...]
-#    tanpa komponen = pasang semua
+#    tanpa komponen = pasang semua config (deps TIDAK ikut; jalankan terpisah)
 #    --link         = symlink, perubahan di repo langsung kebawa
 #    default        = salin (copy), file lama di-backup dulu (*.bak-<epoch>)
 #    --list         = daftar komponen
 #    -h, --help     = bantuan
 #
-#  Komponen: hypr  noctalia  plugins  kitty  starship  wallpapers
+#  Komponen: deps  hypr  noctalia  plugins  kitty  starship  wallpapers
+#  Fresh Arch: ./install.sh deps && ./install.sh
 #  Contoh:   ./install.sh kitty starship
 #            ./install.sh --link hypr noctalia
 # ============================================================
@@ -21,7 +22,9 @@ CFG="$HOME/.config"
 WPDIR="$HOME/Pictures/wallpapers"
 MODE="copy"
 
-ALL_COMPONENTS=(hypr noctalia plugins kitty starship wallpapers)
+# deps = paket via pacman (butuh sudo); sengaja tidak ikut default.
+ALL_COMPONENTS=(deps hypr noctalia plugins kitty starship wallpapers)
+DEFAULT_COMPONENTS=(hypr noctalia plugins kitty starship wallpapers)
 
 # Warna output
 GREEN='\033[0;32m'; YELLOW='\033[1;33m'; RED='\033[0;31m'; NC='\033[0m'
@@ -31,6 +34,7 @@ fail() { echo -e "${RED}✘${NC} $1"; exit 1; }
 
 describe() {
   case "$1" in
+    deps)       echo "Paket Arch dari packages.txt (pacman -S --needed, butuh sudo)" ;;
     hypr)       echo "Hyprland: hyprland.lua + script (call-guard, quick-term, 9router-toggle, cheatsheet)" ;;
     noctalia)   echo "Noctalia: config.toml, router.toml, palet Graphite" ;;
     plugins)    echo "Plugin lokal Noctalia: Desk Todo (todo list di desktop)" ;;
@@ -60,14 +64,14 @@ for arg in "$@"; do
       SELECTED+=("$arg") ;;
   esac
 done
-[[ ${#SELECTED[@]} -gt 0 ]] || SELECTED=("${ALL_COMPONENTS[@]}")
+[[ ${#SELECTED[@]} -gt 0 ]] || SELECTED=("${DEFAULT_COMPONENTS[@]}")
 
 want() { [[ " ${SELECTED[*]} " == *" $1 "* ]]; }
 
 # ---------- Prasyarat (hanya untuk komponen yang dipilih) ----------
 need() { command -v "$1" >/dev/null 2>&1 || warn "$1 belum terpasang ($2)."; }
 
-if want hypr; then
+if want hypr && ! want deps; then
   command -v hyprctl >/dev/null 2>&1 || fail "Hyprland belum terpasang (perlu compositor Hyprland)."
   need flameshot "dipakai screenshot"
   need wofi      "dipakai popup cheatsheet"
@@ -103,6 +107,23 @@ deploy() {
 }
 
 # ---------- Komponen ----------
+install_deps() {
+  command -v pacman >/dev/null 2>&1 || fail "pacman tidak ada — komponen deps hanya untuk Arch/Arch-based."
+  local list="$DOTDIR/packages.txt" pkgs
+  [[ -f "$list" ]] || fail "packages.txt tidak ditemukan."
+  mapfile -t pkgs < <(grep -v -E '^\s*(#|$)' "$list")
+  echo "Memasang ${#pkgs[@]} paket (sudo diminta)..."
+  sudo pacman -S --needed "${pkgs[@]}"
+  ok "Paket terpasang"
+
+  # Layanan yang dipakai widget bar (jaringan + bluetooth)
+  sudo systemctl enable --now NetworkManager.service bluetooth.service
+  ok "NetworkManager + bluetooth aktif"
+
+  # Folder standar (Pictures/, dll.) — dipakai path wallpaper
+  xdg-user-dirs-update && ok "Folder user dibuat (~/Pictures dll.)"
+}
+
 install_hypr() {
   deploy "$DOTDIR/config/hypr/hyprland.lua"      "$CFG/hypr/hyprland.lua"
   deploy "$DOTDIR/config/hypr/cheatsheet.sh"     "$CFG/hypr/cheatsheet.sh"
